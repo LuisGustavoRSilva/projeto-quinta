@@ -1,0 +1,133 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget
+
+
+class Janela(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('Label Dentro de Outra')
+        self.setGeometry(100, 100, 400, 300)
+
+        # Label principal
+        self.label_principal = QLabel('Label Principal', self)
+        self.label_principal.setGeometry(50, 50, 300, 100)
+        self.label_principal.setStyleSheet("""
+            background-color: lightblue;
+            font-size: 16px;
+            padding: 10px;
+        """)
+
+        # Label secundária dentro da label principal
+        self.label_secundaria = QLabel('Label Secundária', self.label_principal)
+        self.label_secundaria.setGeometry(20, 40, 200, 50)
+        self.label_secundaria.setStyleSheet("""
+            background-color: lightgreen;
+            font-size: 14px;
+            padding: 5px;
+        """)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    janela = Janela()
+    janela.show()
+    sys.exit(app.exec_())
+
+
+
+
+import sys
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QHBoxLayout,
+    QLabel, QLineEdit, QPushButton, QListWidget, QMessageBox
+)
+
+
+class CaixaRegistradora(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle("Sistema de Caixa Registradora")
+        self.setGeometry(100, 100, 400, 400)
+
+        # Layout principal
+        layout = QVBoxLayout()
+
+        # Label e entrada para o nome do item
+        self.label_item = QLabel("Nome do Item:")
+        self.input_item = QLineEdit()
+        layout.addWidget(self.label_item)
+        layout.addWidget(self.input_item)
+
+        # Label e entrada para o preço do item
+        self.label_preco = QLabel("Preço do Item (R$):")
+        self.input_preco = QLineEdit()
+        layout.addWidget(self.label_preco)
+        layout.addWidget(self.input_preco)
+
+        # Botão para adicionar item
+        self.btn_adicionar = QPushButton("Adicionar Item")
+        self.btn_adicionar.clicked.connect(self.adicionar_item)
+        layout.addWidget(self.btn_adicionar)
+
+        # Lista de itens
+        self.lista_itens = QListWidget()
+        layout.addWidget(self.lista_itens)
+
+        # Botões para calcular total e limpar
+        botoes_layout = QHBoxLayout()
+        self.btn_calcular = QPushButton("Calcular Total")
+        self.btn_calcular.clicked.connect(self.calcular_total)
+        self.btn_limpar = QPushButton("Limpar")
+        self.btn_limpar.clicked.connect(self.limpar_lista)
+        botoes_layout.addWidget(self.btn_calcular)
+        botoes_layout.addWidget(self.btn_limpar)
+        layout.addLayout(botoes_layout)
+
+        # Label para mostrar o total
+        self.label_total = QLabel("Total: R$ 0.00")
+        layout.addWidget(self.label_total)
+
+        # Configuração final
+        self.setLayout(layout)
+
+    def adicionar_item(self):
+        """Adiciona um item à lista."""
+        nome = self.input_item.text()
+        preco = self.input_preco.text()
+
+        if not nome or not preco:
+            QMessageBox.warning(self, "Erro", "Por favor, preencha todos os campos!")
+            return
+
+        try:
+            preco_float = float(preco)
+            self.lista_itens.addItem(f"{nome} - R$ {preco_float:.2f}")
+            self.input_item.clear()
+            self.input_preco.clear()
+        except ValueError:
+            QMessageBox.warning(self, "Erro", "Por favor, insira um preço válido!")
+
+    def calcular_total(self):
+        """Calcula o total dos itens na lista."""
+        total = 0.0
+        for i in range(self.lista_itens.count()):
+            item_texto = self.lista_itens.item(i).text()
+            preco_str = item_texto.split(" - R$ ")[1]
+            total += float(preco_str)
+
+        self.label_total.setText(f"Total: R$ {total:.2f}")
+
+    def limpar_lista(self):
+        """Limpa a lista de itens e o total."""
+        self.lista_itens.clear()
+        self.label_total.setText("Total: R$ 0.00")
+
+
+if __name__ == '__main__':
+    app = QApplication
