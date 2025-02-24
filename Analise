@@ -1,0 +1,45 @@
+Análise de Requisitos para Sistema de Ordem de Serviços de uma Luthieria
+
+1. Introdução Este documento apresenta a análise de requisitos para um sistema de ordem de serviços de uma luthieria. O objetivo é definir funcionalidades e necessidades do sistema para otimizar o gerenciamento de reparos, manutenções e customizações de instrumentos musicais.
+
+2. Objetivo do Sistema O sistema visa facilitar a gestão de serviços, permitindo que clientes registrem solicitações, acompanhem status de atendimento e que a luthieria administre eficientemente os serviços prestados.
+
+3. Requisitos Funcionais
+
+Cadastro de clientes com informações básicas e histórico de serviços.
+
+Cadastro de serviços disponíveis (reparos, ajustes, customizações, etc.).
+
+Emissão de ordem de serviço com descrição detalhada, prazo e custo estimado.
+
+Acompanhamento de status da ordem (Aberta, Em andamento, Concluída, Cancelada).
+
+Notificação ao cliente sobre atualizações do serviço.
+
+Registro de pagamentos e emissão de recibos.
+
+Geração de relatórios para análise financeira e operacional.
+
+
+4. Requisitos Não Funcionais
+
+Interface intuitiva e responsiva para acesso em dispositivos móveis e desktop.
+
+Segurança dos dados dos clientes e serviços.
+
+Backup periódico para evitar perda de informações.
+
+Integração com meios de pagamento digitais.
+
+
+5. Restrições e Premissas
+
+O sistema deverá ser desenvolvido utilizando tecnologias web.
+
+O acesso deverá ser restrito a usuários autorizados mediante login.
+
+A plataforma deverá garantir conformidade com a LGPD para proteção de dados.
+
+
+6. Conclusão Este documento estabelece os principais requisitos para o desenvolvimento do sistema de ordem de serviços da luthieria. As funcionalidades aqui descritas garantirão maior eficiência no gerenciamento de serviços e melhor experiência para os clientes.
+
